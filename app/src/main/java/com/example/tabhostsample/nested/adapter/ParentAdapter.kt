@@ -1,4 +1,4 @@
-package com.example.tabhostsample.nested
+package com.example.tabhostsample.nested.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabhostsample.R
+import com.example.tabhostsample.nested.model.ParentModel
 import kotlinx.android.synthetic.main.nested_parent_recycler.view.*
 
 /**
@@ -32,11 +33,13 @@ class ParentAdapter(private val parents : List<ParentModel>) :    RecyclerView.A
                                   position: Int) {
         val parent = parents[position]
         holder.textView.text = parent.title
-        val childLayoutManager = LinearLayoutManager(             holder.recyclerView.context, LinearLayout.HORIZONTAL, false)
+        val childLayoutManager = LinearLayoutManager(
+            holder.recyclerView.context, LinearLayout.VERTICAL, false)
         childLayoutManager.initialPrefetchItemCount = 4
         holder.recyclerView.apply {
             layoutManager = childLayoutManager
-            adapter = ChildAdapter(parent.children)
+            adapter =
+                ChildAdapter(parent.children)
             setRecycledViewPool(viewPool)
         }
 

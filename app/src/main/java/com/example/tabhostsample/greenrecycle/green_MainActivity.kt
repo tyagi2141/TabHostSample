@@ -1,4 +1,4 @@
-package com.example.tabhostsample.nested
+package com.example.tabhostsample.greenrecycle
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,9 +14,13 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 
 import com.example.tabhostsample.R
+import com.example.tabhostsample.greenrecycle.adapter.greenParentAdapter
 import com.example.tabhostsample.nested.adapter.ParentAdapter
 import com.example.tabhostsample.nested.model.ChildModel
 import com.example.tabhostsample.nested.model.ParentModel
+import com.greenlightplanet.retailer.models.reporttodaysmodel.Orders
+import com.greenlightplanet.retailer.models.reporttodaysmodel.Retail_visits
+import com.greenlightplanet.retailer.models.reporttodaysmodel.TodaysResponseDataModel
 import kotlinx.android.synthetic.main.nested_activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -25,11 +29,12 @@ import org.json.JSONObject
 /**
  * Created by Rahul on 25/06/20.
  */
-class Nested_MainActivity : AppCompatActivity() {
+class green_MainActivity : AppCompatActivity() {
     private val TAG = "Nested_MainActivity"
     private var requestQueue: RequestQueue? = null
     var url: String? = null
-    private var adapterList: MutableList<ParentModel> = mutableListOf()
+    private var adapterList: MutableList<Retail_visits> = mutableListOf()
+    private var adapterList_order: MutableList<Orders> = mutableListOf()
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +42,18 @@ class Nested_MainActivity : AppCompatActivity() {
         url = "http://dev.glpapps.com/retail/api/v1/report/todays/3/2020-06-25/"
         requestQueue = Volley.newRequestQueue(this)
         jsonParse()
-        initRecycler()
+       // initRecycler()
     }
 
     @SuppressLint("WrongConstant")
-    private fun initRecycler() {
+    private fun initRecycler(todaysResponseDataModel: TodaysResponseDataModel) {
         recyclerView = rv_parent
 
         recyclerView.apply {
             layoutManager =
-                LinearLayoutManager(this@Nested_MainActivity, LinearLayout.VERTICAL, false)
-            adapter = ParentAdapter(
-                ParentDataFactory.getParents(40)
+                LinearLayoutManager(this@green_MainActivity, LinearLayout.VERTICAL, false)
+            adapter = greenParentAdapter(
+               todaysResponseDataModel.retail_visits
             )
         }
 
@@ -66,10 +71,35 @@ class Nested_MainActivity : AppCompatActivity() {
                     val jsonArray = json.getJSONArray("retail_visits")
                     for (i in 0 until jsonArray.length()) {
                         val employee = jsonArray.getJSONObject(i)
+                        val orderArray = employee.getJSONArray("orders")
 
-                       // adapterList.addAll(ParentModel(employee.getString(),employee as List<ChildModel>))
-Log.e("fgfdgfdgfhfg",""+employee)
+                        for (j in 0 until orderArray.length()) {
+
+                            val mOrder = orderArray.getJSONObject(j)
+                            Log.e("rdghfhfghgfh",""+mOrder.toString())
+
+                            adapterList_order.add(
+
+                                    Orders(mOrder.getInt("id"),mOrder.getString("product"),mOrder.getString("order_date"),mOrder.getInt("price"),mOrder.getInt("inhand_units"),mOrder.getInt("secondary_units"),
+                                        mOrder.getInt("amount"),mOrder.getString("created_at"),mOrder.getString("updated_at"))
+                                )
+
+
+                        }
+
+                        Log.e("fgfdgfdgfhfg",""+employee)
+
+                        adapterList.add(Retail_visits(employee.getInt("id"),employee.getString("retail"),
+                            employee.getString("distributor"),adapterList_order,employee.getString("visit_date"),
+                            employee.getInt("total_amount"),employee.getInt("amount_paid"),
+                            employee.getInt("credit"),employee.getString("desc"),employee.getBoolean("is_regular"),
+                            employee.getString("created_at"),
+                            employee.getString("updated_at"),
+                            employee.getInt("user")))
+
                     }
+                    initRecycler(TodaysResponseDataModel(adapterList))
+
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Log.e("errrrrr",""+e.toString())

@@ -1,5 +1,7 @@
 package com.example.tabhostsample.nested
 
+import com.example.tabhostsample.nested.model.ChildModel
+import com.example.tabhostsample.nested.model.ParentModel
 import java.util.*
 
 /**
@@ -22,7 +24,10 @@ object ParentDataFactory{
     fun getParents(count : Int) : List<ParentModel>{
         val parents = mutableListOf<ParentModel>()
         repeat(count){
-            val parent = ParentModel(randomTitle(), randomChildren())
+            val parent = ParentModel(
+                randomTitle(),
+                randomChildren()
+            )
             parents.add(parent)
         }
         return parents

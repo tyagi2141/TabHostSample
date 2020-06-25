@@ -1,6 +1,7 @@
 package com.example.tabhostsample.nested
 
 import com.example.tabhostsample.R
+import com.example.tabhostsample.nested.model.ChildModel
 import java.util.*
 
 /**
@@ -24,7 +25,10 @@ object ChildDataFactory{
     fun getChildren(count : Int) : List<ChildModel>{
         val children = mutableListOf<ChildModel>()
         repeat(count){
-            val child = ChildModel(randomImage(), randomTitle())
+            val child = ChildModel(
+                randomImage(),
+                randomTitle()
+            )
             children.add(child)
         }
         return children

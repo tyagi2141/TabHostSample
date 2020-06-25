@@ -1,4 +1,4 @@
-package com.example.tabhostsample.nested
+package com.example.tabhostsample.nested.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabhostsample.R
+import com.example.tabhostsample.nested.model.ChildModel
 import kotlinx.android.synthetic.main.nested_child_recycler.view.*
 
 /**

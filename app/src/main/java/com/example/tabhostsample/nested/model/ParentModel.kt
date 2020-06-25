@@ -1,4 +1,6 @@
-package com.example.tabhostsample.nested
+package com.example.tabhostsample.nested.model
+
+import com.example.tabhostsample.nested.model.ChildModel
 
 /**
  * Created by Rahul on 25/06/20.

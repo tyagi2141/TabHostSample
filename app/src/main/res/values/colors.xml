@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+
+    <!--<color name="colorPrimary">#262626</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_GLP">#fcdb04</color>
+    <color name="color_GLP_Dark">#CBB002</color>
+    <color name="color_disable">#C0C0C0</color>-->
+
+    <!--Rahul-Color-Start-->
+    <color name="colorPrimary">#FFFF33</color>
+    <color name="colorPrimaryDark">#fcdb04</color>
+    <color name="colorAccent">#808080</color>
+    <color name="colorMapShadow">#30FFFF33</color>
+    <color name="clr_glp">#fcdb04</color>
+    <color name="clr_glp_dark">#cab002</color>
+    <color name="colorBackground">#EDEDED</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorHighlightWhite">#d3d3d3</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGreen">#428b28</color>
+
+    <color name="colorBlue">#3792e5</color>
+    <color name="colorDarkBlue">#1726E4</color>
+
+    <color name="orange">#FFA500</color>
+    <color name="tabsScrollColor">#004D40</color>
+    <color name="year">#999999</color>
+    <color name="title">#FFFFFF</color>
+    <color name="colorGrey">#515151</color>
+    <color name="etTextColor">#000000</color>>
+    <color name="etTextHintColor">#000000</color>
+
+
+    <color name="colorWhiteLight">#80FFFFFF</color>
+    <!--Rahul-Color-End-->
+
 </resources>
